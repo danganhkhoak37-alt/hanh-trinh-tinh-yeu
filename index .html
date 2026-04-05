@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hành Trình 10 Năm Yêu Thương</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #051612; 
+            --gold: #c5a059;     
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body, html {
+            background-color: var(--bg-color);
+            color: #fff;
+            font-family: 'Quicksand', sans-serif;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* --- 1. PHẦN BÌA CHÍNH (ẢNH 4) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(rgba(5, 22, 18, 0.6), rgba(5, 22, 18, 0.8)), 
+                        url('D:/html/photo/4.jpg') no-repeat center center/cover;
+            background-attachment: fixed;
+        }
+
+        .hero-content {
+            z-index: 2;
+            padding: 30px;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            backdrop-filter: blur(8px);
+            border-radius: 5px;
+        }
+
+        .hero h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(3rem, 10vw, 5rem);
+            color: var(--gold);
+        }
+
+        .hero .sub-text {
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-size: 1rem;
+            margin-top: 10px;
+            color: var(--gold);
+        }
+
+        /* --- 2. TIMELINE DỌC VỚI 15 ẢNH --- */
+        .timeline-section {
+            padding: 100px 20px;
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Đường kẻ vàng nối các nút */
+        .timeline-section::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50px;
+            bottom: 50px;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--gold), var(--gold), transparent);
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .photo-item {
+            position: relative;
+            margin-bottom: 120px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .photo-item.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Nút tròn vàng giữa đường kẻ */
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: -30px;
+            width: 12px;
+            height: 12px;
+            background: var(--gold);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 15px var(--gold);
+            border: 2px solid var(--bg-color);
+        }
+
+        .content-card {
+            width: 100%;
+            background: var(--glass);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            padding: 15px;
+            border-radius: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .content-card img {
+            width: 100%;
+            border-radius: 15px;
+            display: block;
+            margin-bottom: 15px;
+            border: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        .tag {
+            color: var(--gold);
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+        }
+
+        .msg-box {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #ddd;
+            font-style: italic;
+        }
+
+        /* --- 3. PHẦN KẾT THÚC --- */
+        .final-footer {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(to top, #0a2a24, var(--bg-color));
+            padding: 20px;
+        }
+
+        .final-footer h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .scroll-up-btn {
+            margin-top: 40px;
+            background: none;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 12px 30px;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: 0.3s;
+            font-family: 'Quicksand';
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .scroll-up-btn:hover {
+            background: var(--gold);
+            color: var(--bg-color);
+        }
+
+        /* Responsive Mobile */
+        @media (max-width: 600px) {
+            .timeline-section::before { left: 20px; transform: none; }
+            .timeline-dot { left: 20px; transform: none; }
+            .photo-item { justify-content: flex-start; padding-left: 45px; }
+            .hero h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Our Love Story</h1>
+            <p class="sub-text">Thúy Nhi & Anh Khoa</p>
+            <p style="margin-top: 20px; opacity: 0.7;">2025 - Forever</p>
+        </div>
+        <p style="position: absolute; bottom: 30px; letter-spacing: 3px; font-size: 0.8rem; color: var(--gold); animation: bounce 2s infinite;">
+            CUỘN XUỐNG ĐỂ XEM KỶ NIỆM <br> ▼
+        </p>
+    </section>
+
+    <section class="timeline-section">
+        
+        <div class="photo-item">
+            <div class="timeline-dot"></div>
+            <div class="content-card">
+                <span class="tag">01. Gặp Gỡ</span>
+                <img src="D:/html/photo/1.jpg">
+                <div class="msg-box">Từ những ngày đầu khi anh còn chập chững tập yêu.</div>
+            </div>
+        </div>
+
+        <div class="photo-item">
+            <div class="timeline-dot"></div>
+            <div class="content-card">
+                <span class="tag">02. Hẹn Hò</span>
+                <img src="D:/html/photo/2.jpg">
+                <div class="msg-box">Ở bên em, mọi thứ đều trở nên thật nhẹ nhàng và hạnh phúc.</div>
+            </div>
+        </div>
+
+        <div class="photo-item">
+            <div class="timeline-dot"></div>
+            <div class="content-card">
+                <span class="tag">03. Nụ Cười</span>
+                <img src="D:/html/photo/3.jpg">
+                <div class="msg-box">Em cười tươi như nắng mùa hạ làm ấm áp cả trái tim anh.</div>
+            </div>
+        </div>
+
+        <div class="photo-item">
+            <div class="timeline-dot"></div>
+            <div class="content-card">
+                <span class="tag">04. Chúng Mình</span>
+                <img src="D:/html/photo/4.jpg">
+                <div class="msg-box">Khoảnh khắc bình yên nhất là khi có em bên cạnh.</div>
+            </div>
+        </div>
+
+        <div class="photo-item">
+            <div class="timeline-dot"></div>
+            <div class="content-card">
+                <span class="tag">05. Phiêu Du</span>
+                <img src="D:/html/photo/5.jpg">
+                <div class="msg-box">Lần đầu tiên trong đời 2 đứa có chuyến đi xa nè.</div>
+            </div>
+        </div>
+
+        <div class="photo-item">
+            <div class="timeline-dot"></div>
+            <div class="content-card">
+                <span class="tag">06. Ngọt Ngào</span>
+                <img src="D:/html/photo/6.jpg">
+                <div class="msg-box">Dành thời gian cho nhau nhiều hơn để thấu hiểu.</div>
+            </div>
+        </div>
+
+        <div class="photo-item">
+            <div class="timeline-dot"></div>
+            <div class="content-card">
+                <span class="tag">07. Thanh Xuân</span>
+                <img src="D:/html/photo/7.jpg">
+                <div class="msg-box">Kết thúc những ngày thanh xuân trên ghế nhà trường.</div>
+            </div>
+        </div>
+
+        <div class="photo-item">
+            <div class="timeline-dot"></div>
+            <div class="content-card">
+                <span class="tag">08. Bất Ngờ</span>
+                <img src="D:/html/photo/8.jpg">
+                <div class="msg-box">Những món quà nhỏ nhưng chứa đựng tình cảm lớn.</div>
+            </div>
+        </div>
+
+        <div class="photo-item">
+            <div class="timeline-dot"></div>
+            <div class="content-card">
+                <span class="tag">09. Thử Thách</span>
+                <img src="D:/html/photo/9.jpg">
+                <div class="msg-box">Khoảng cách địa lý không làm khó được hai trái tim.</div>
+            </div>
+        </div>
+
+        <div class="photo-item">
+            <div class="timeline-dot"></div>
+            <div class="content-card">
+                <span class="tag">10. Lời Hứa</span>
+                <img src="D:/html/photo/10.jpg">
+                <div class="msg-box">Giữ đúng lời hứa, luôn trân trọng từng phút giây gặp gỡ.</div>
+            </div>
+        </div>
+
+        <div class="photo-item">
+            <div class="timeline-dot"></div>
+            <div class="content-card">
+                <span class="tag">11. Khám Phá</span>
+                <img src="D:/html/photo/11.jpg">
+                <div class="msg-box">Cùng nhau đi đến những chân trời mới lạ.</div>
+            </div>
+        </div>
+
+        <div class="photo-item">
+            <div class="timeline-dot"></div>
+            <div class="content-card">
+                <span class="tag">12. Bình Yên</span>
+                <img src="D:/html/photo/12.jpg">
+                <div class="msg-box">Mọi giông bão dừng sau cánh cửa, chỉ còn đôi ta.</div>
+            </div>
+        </div>
+
+        <div class="photo-item">
+            <div class="timeline-dot"></div>
+            <div class="content-card">
+                <span class="tag">13. Cột Mốc</span>
+                <img src="D:/html/photo/13.jpg">
+                <div class="msg-box">Vậy là chúng ta đã cùng nhau đi qua 1 năm rực rỡ.</div>
+            </div>
+        </div>
+
+        <div class="photo-item">
+            <div class="timeline-dot"></div>
+            <div class="content-card">
+                <span class="tag">14. Đồng Hành</span>
+                <img src="D:/html/photo/14.jpg">
+                <div class="msg-box">Cái Tết thứ 2 vẫn nắm chặt tay nhau.</div>
+            </div>
+        </div>
+
+        <div class="photo-item">
+            <div class="timeline-dot"></div>
+            <div class="content-card">
+                <span class="tag">15. Trân Trọng</span>
+                <img src="D:/html/photo/15.jpg">
+                <div class="msg-box">Dẫu có khác biệt, ta vẫn chọn cùng nhau đi hết cuộc đời.</div>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="final-footer">
+        <h2>To Be Continued...</h2>
+        <p style="color: var(--gold); letter-spacing: 3px;">HÀNH TRÌNH CỦA CHÚNG MÌNH LÀ MÃI MÃI</p>
+        <p style="opacity: 0.5; margin-top: 20px;">Cảm ơn em vì đã là một phần của anh.</p>
+        <button class="scroll-up-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Quay lại đầu trang</button>
+    </section>
+
+    <script>
+        // Hiệu ứng hiện dần khi lướt xuống
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.photo-item').forEach(item => observer.observe(item));
+
+        // Hiệu ứng Bounce cho mũi tên
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes bounce {
+                0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+                40% {transform: translateY(-10px);}
+                60% {transform: translateY(-5px);}
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
